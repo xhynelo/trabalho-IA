@@ -42,13 +42,12 @@ def score(cur_move):
             if lines[x+1][y] and columns[y][x] and columns[y+1][x]:
                 ponto+=1
     elif cur_move[0] == "c":
-        if not x==0 and not y==n-1:
-            if not x == 0 and not y == n - 1:
-                if columns[x - 1][y] and lines[y][x - 1] and lines[y + 1][x - 1]:
-                    ponto += 1
-            if not x == n and not y == n - 1:
-                if columns[x + 1][y] and lines[y][x] and lines[y + 1][x]:
-                    ponto += 1
+        if not x == 0 and not y == n - 1:
+            if columns[x - 1][y] and lines[y][x - 1] and lines[y + 1][x - 1]:
+                ponto += 1
+        if not x == n and not y == n - 1:
+            if columns[x + 1][y] and lines[y][x] and lines[y + 1][x]:
+                ponto += 1
     return ponto
 
 
