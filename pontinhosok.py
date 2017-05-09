@@ -34,7 +34,6 @@ def score(cur_move):
     x = int(cur_move[1])
     y = int(cur_move[2])
     ponto = 0
-
     if cur_move == "l":
         if not x == 0 and not y == n-1:
             if lines[x-1][y] and columns[y][x-1] and columns[y+1][x-1]:
@@ -42,7 +41,6 @@ def score(cur_move):
         if not x == n and not y == n-1:
             if lines[x+1][y] and columns[y][x] and columns[y+1][x]:
                 ponto+=1
-
     elif cur_move == "c":
         if not x==0 and not y==n-1:
             if not x == 0 and not y == n - 1:
@@ -51,7 +49,6 @@ def score(cur_move):
             if not x == n and not y == n - 1:
                 if columns[x + 1][y] and lines[y][x] and lines[y + 1][x]:
                     ponto += 1
-
     return ponto
 
 
@@ -124,6 +121,6 @@ def main():
             if stemp == 0:
                 turno = humano
     print("Score humano: ", humano.pontuacao)
-    print("Score ia: ", ia)
+    print("Score ia: ", ia.pontuacao)
 
 main()
