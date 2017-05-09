@@ -100,6 +100,7 @@ def entrada():
             y = input("(0~" + str(n - 2) + ")")
     return str(orientacao+" "+x+" "+y)
 
+
 def fimDeJogo():
     for i in range(n):
         for j in range(n-1):
@@ -110,6 +111,22 @@ def fimDeJogo():
             if not columns[i][j]:
                 return False
     return True
+
+def minimax(node, depth, ia, humano, realIa):
+     if depth == 0 or fimDeJogo():
+         return ia.pontos - humano.pontos
+     if ia==realIa:
+         bestValue = -n**2+1
+         for child in node:
+             v = minimax(child, depth - 1, humano, ia, realIa)
+             bestValue = max(bestValue, v)
+         return bestValue
+     else:
+         bestValue = n**2+1
+         for child in node:
+             v = minimax(child, depth - 1, ia, humano, realIa)
+             bestValue = min(bestValue, v)
+         return bestValue
 
 def main():
     humano = Player()
