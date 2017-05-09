@@ -42,51 +42,32 @@ def score(cur_move):
         if not y == n-1:
             if not columns[y+1][x]:
                 return False
-def ponto_cima(matriz, x, y):
-    if not matriz[x-1][y]:
-        return False
 
 
 
-def score2(cur_move):
+
+def score(cur_move):
     cur_move = cur_move.split(" ")
     x = int(cur_move[1])
     y = int(cur_move[2])
+    ponto = 0;
 
     if cur_move == "l":
-        ponnto_cima(x, y)
-        if not columns[y][x]:
-            return False
-        if not x == 0:
-            if not lines[x - 1][y] and not columns[y][x - 1]:
-                return False
-            if not y == n - 1:
-                if not columns[y + 1][x - 1]:
-                    return False
-        if not x == n:
-            if not lines[x + 1][y]:
-                return False
-        if not y == n - 1:
-            if not columns[y + 1][x]:
-                return False
-
+        if not x == 0 and not y == n-1:
+            if lines[x-1][y] and columns[y][x-1] and columns[y+1][x-1]:
+                ponto+=1
+        if not x == n and not y == n-1:
+            if lines[x+1][y] and columns[y][x] and columns[y+1][x]:
+                ponto+=1
 
     elif cur_move == "c":
-        if not lines[y][x]:
-            return False
-        if not x == 0:
-            if not columns[x-1][y] and not lines[y][x-1]:
-                return False
-            if not y == n-1:
-                if not lines[y+1][x-1]:
-                    return False
-        if not x == n:
-            if not columns[x+1][y]
-                return False
-        if not y == n-1:
-            if not lines[y+1][x]:
-                return False
+        if not x==0 and not y==n-1:
+            if not x == 0 and not y == n - 1:
+                if columns[x - 1][y] and lines[y][x - 1] and lines[y + 1][x - 1]:
+                    ponto += 1
+            if not x == n and not y == n - 1:
+                if columns[x + 1][y] and lines[y][x] and lines[y + 1][x]:
+                    ponto += 1
         
-    return True
+    return ponto
 
-def
