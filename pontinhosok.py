@@ -28,7 +28,7 @@ def score(cur_move):
     cur_move = cur_move.split(" ")
     x = int(cur_move[1])
     y = int(cur_move[2])
-    ponto = 0;
+    ponto = 0
 
     if cur_move == "l":
         if not x == 0 and not y == n-1:
@@ -49,6 +49,7 @@ def score(cur_move):
 
     return ponto
 
+<<<<<<< HEAD
 def printa_matriz()
 	print(" ", end="")
 	for x in range(len(lines)):
@@ -68,3 +69,15 @@ def printa_matriz()
 	    print(i)
 	for i in range(len(lines)-1):
 	    print("  ",i, end="")
+=======
+def entrada():
+    orientacao = input("Quer fazer uma Linha ou Coluna? (l/c)")
+    if orientacao == "l":
+        x = input("Insira em qual linha que você quer por: (0~"+str(n)+")")
+        y = input("Insira qual posição da linha você quer por: (0~"+str(n-1)+")")
+    if orientacao == "c":
+        x = input("Insira em qual coluna que você quer por: (0~"+str(n)+")")
+        y = input("Insira qual posição da coluna você quer por: (0~"+str(n-1)+")")
+
+    return str(orientacao+" "+x+" "+y)
+>>>>>>> c548368a101354c6f215d938ea1c0a23cef02bec
