@@ -49,3 +49,22 @@ def score(cur_move):
 
     return ponto
 
+def printa_matriz()
+	print(" ", end="")
+	for x in range(len(lines)):
+	    print(x, "  ", end="")
+	print("")
+	for i, linha in enumerate(lines):
+	    print(i, end="")
+	    for x in linha:
+	        print("*", end="")
+	        print("---" if x else "   ", end="")
+	    print("*")
+	    if i == len(columns[-1]):
+	        break
+	    print(" ", end="")
+	    for x in columns:
+	        print("|   " if x[i] else "    ", end="")
+	    print(i)
+	for i in range(len(lines)-1):
+	    print("  ",i, end="")
