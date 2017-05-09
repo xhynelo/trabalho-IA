@@ -23,28 +23,6 @@ def move(smove):
     else:
         return False
 
-def score(cur_move):
-    cur_move = cur_move.split(" ")
-    x = int(cur_move[1])
-    y = int(cur_move[2])
-    if cur_move == "l":
-        if not columns[y][x]:
-            return False
-        if not x == 0:
-            if not lines[x-1][y] and not columns[y][x-1]:
-                return False
-            if not y == n-1:
-                if not columns[y+1][x-1]:
-                    return False
-        if not x == n:
-            if not lines[x+1][y]:
-                return False
-        if not y == n-1:
-            if not columns[y+1][x]:
-                return False
-
-
-
 
 def score(cur_move):
     cur_move = cur_move.split(" ")
@@ -68,6 +46,6 @@ def score(cur_move):
             if not x == n and not y == n - 1:
                 if columns[x + 1][y] and lines[y][x] and lines[y + 1][x]:
                     ponto += 1
-        
+
     return ponto
 
