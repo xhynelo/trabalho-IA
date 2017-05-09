@@ -1,9 +1,3 @@
-from __future__ import print_function
-
-from csv import excel
-
-from pyparsing import line
-
 n = 3
 lines = [[False]*(n-1) for _ in range(n)]
 columns = [[False]*(n-1) for _ in range(n)]
