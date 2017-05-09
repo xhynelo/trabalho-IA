@@ -82,3 +82,14 @@ def entrada():
 
     return str(orientacao+" "+x+" "+y)
 
+def fimDeJogo():
+    for i in range(n):
+        for j in range(n-1):
+            if not lines[i][j]:
+                return False
+    for i in range(n):
+        for j in range(n - 1):
+            if not columns[i][j]:
+                return False
+    return True
+
