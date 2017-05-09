@@ -87,13 +87,22 @@ def printa_matriz():
 
 def entrada():
     orientacao = input("Quer fazer uma Linha ou Coluna? (l/c)")
+    while orientacao != "l" and orientacao != "c":
+        orientacao = input("(l/c)")
     if orientacao == "l":
         x = input("Insira em qual linha que você quer por: (0~"+str(n-1)+")")
+        while x > str(n-1) or int(x) < 0:
+            x = input("(0~" + str(n - 1) + ")")
         y = input("Insira qual posição da linha você quer por: (0~"+str(n-2)+")")
+        while y > str(n-2) or int(y) < 0:
+            y = input("(0~" + str(n - 2) + ")")
     if orientacao == "c":
         x = input("Insira em qual coluna que você quer por: (0~"+str(n-1)+")")
+        while x > str(n-1) or int(x) < 0:
+            x = input("(0~" + str(n - 1) + ")")
         y = input("Insira qual posição da coluna você quer por: (0~"+str(n-2)+")")
-
+        while y > str(n-2) or int(y) < 0:
+            y = input("(0~" + str(n - 2) + ")")
     return str(orientacao+" "+x+" "+y)
 
 def fimDeJogo():
@@ -120,7 +129,7 @@ def main():
             s=entrada()
             move(s)
             stemp = score(s)
-            turno.pontuacao = stemp
+            turno.pontuacao += stemp
             if stemp == 0:
                 turno = ia
         if turno == ia:
@@ -129,7 +138,7 @@ def main():
             s=entrada()
             move(s)
             stemp = score(s)
-            turno.pontuacao = stemp
+            turno.pontuacao += stemp
             if stemp == 0:
                 turno = humano
     print("Score humano: ", humano.pontuacao)
