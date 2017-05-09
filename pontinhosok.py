@@ -9,8 +9,9 @@ lines = [[False]*(n-1) for _ in range(n)]
 columns = [[False]*(n-1) for _ in range(n)]
 
 class Player:
-    def pontuacao(self, pontuacao):
-        self.pontuacao = pontuacao
+    pontos=0
+    def pontuacao(self, pontos):
+        self.pontos = pontos
 
 def move(smove):
     smove = smove.split(" ")
@@ -127,9 +128,11 @@ def main():
         if turno == humano:
             print("Humano")
             s=entrada()
+            while not move(s):
+                s=entrada()
             move(s)
             stemp = score(s)
-            turno.pontuacao += stemp
+            turno.pontos += stemp
             if stemp == 0:
                 turno = ia
         if turno == ia:
@@ -138,10 +141,10 @@ def main():
             s=entrada()
             move(s)
             stemp = score(s)
-            turno.pontuacao += stemp
+            turno.pontos += stemp
             if stemp == 0:
                 turno = humano
-    print("Score humano: ", humano.pontuacao)
-    print("Score ia: ", ia.pontuacao)
+    print("Score humano: ", humano.pontos)
+    print("Score ia: ", ia.pontos)
 
 main()
