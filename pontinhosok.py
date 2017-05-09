@@ -50,7 +50,7 @@ def score(cur_move):
     return ponto
 
 
-def printa_matriz()
+def printa_matriz():
 	print(" ", end="")
 	for x in range(len(lines)):
 	    print(x, "  ", end="")
@@ -68,7 +68,7 @@ def printa_matriz()
 	        print("|   " if x[i] else "    ", end="")
 	    print(i)
 	for i in range(len(lines)-1):
-	    print("  ",i, end="")
+	    print("  ", i, end="")
 
 def entrada():
     orientacao = input("Quer fazer uma Linha ou Coluna? (l/c)")
