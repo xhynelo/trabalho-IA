@@ -1,4 +1,5 @@
 from pyparsing import line
+from __future__ import print_function
 
 n = 4
 lines = [[False]*(n-1) for _ in range(n)]
@@ -50,7 +51,7 @@ def score(cur_move):
     return ponto
 
 
-def printa_matriz()
+def printa_matriz():
 	print(" ", end="")
 	for x in range(len(lines)):
 	    print(x, "  ", end="")
