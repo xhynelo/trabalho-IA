@@ -4,7 +4,7 @@ from csv import excel
 
 from pyparsing import line
 
-n = 4
+n = 3
 lines = [[False]*(n-1) for _ in range(n)]
 columns = [[False]*(n-1) for _ in range(n)]
 
@@ -129,6 +129,7 @@ def main():
             print("Humano")
             s=entrada()
             while not move(s):
+                print("Linha já marcada")
                 s=entrada()
             move(s)
             stemp = score(s)
