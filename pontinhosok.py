@@ -1,4 +1,7 @@
 from __future__ import print_function
+
+from csv import excel
+
 from pyparsing import line
 
 n = 4
@@ -35,19 +38,29 @@ def score(cur_move):
     y = int(cur_move[2])
     ponto = 0
     if cur_move[0] == "l":
-        if not x == 0 and not y == n-1:
-            if lines[x-1][y] and columns[y][x-1] and columns[y+1][x-1]:
-                ponto+=1
-        if not x == n and not y == n-1:
+        try:
+            if not x == 0:
+                if lines[x-1][y] and columns[y][x-1] and columns[y+1][x-1]:
+                    ponto+=1
+        except:
+            ...
+        try:
             if lines[x+1][y] and columns[y][x] and columns[y+1][x]:
                 ponto+=1
+        except:
+            ...
     elif cur_move[0] == "c":
-        if not x == 0 and not y == n - 1:
-            if columns[x - 1][y] and lines[y][x - 1] and lines[y + 1][x - 1]:
-                ponto += 1
-        if not x == n and not y == n - 1:
+        try:
+            if not x == 0:
+                if columns[x - 1][y] and lines[y][x - 1] and lines[y + 1][x - 1]:
+                    ponto += 1
+        except:
+            ...
+        try:
             if columns[x + 1][y] and lines[y][x] and lines[y + 1][x]:
                 ponto += 1
+        except:
+            ...
     return ponto
 
 
