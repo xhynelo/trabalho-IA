@@ -5,6 +5,10 @@ n = 4
 lines = [[False]*(n-1) for _ in range(n)]
 columns = [[False]*(n-1) for _ in range(n)]
 
+class Player:
+    def pontuacao(self, pontuacao):
+        self.pontuacao = pontuacao
+
 def move(smove):
     smove = smove.split(" ")
     mat = int(smove[1])
@@ -16,8 +20,8 @@ def move(smove):
         else:
             return False
     elif smove[0] == 'c' :
-        if not lines[mat][pos]:
-            lines[mat][pos] = True
+        if not columns[mat][pos]:
+            columns[mat][pos] = True
             return True
         else:
             return False
@@ -52,33 +56,34 @@ def score(cur_move):
 
 
 def printa_matriz():
-	print(" ", end="")
-	for x in range(len(lines)):
-	    print(x, "  ", end="")
-	print("")
-	for i, linha in enumerate(lines):
-	    print(i, end="")
-	    for x in linha:
-	        print("*", end="")
-	        print("---" if x else "   ", end="")
-	    print("*")
-	    if i == len(columns[-1]):
-	        break
-	    print(" ", end="")
-	    for x in columns:
-	        print("|   " if x[i] else "    ", end="")
-	    print(i)
-	for i in range(len(lines)-1):
-	    print("  ", i, end="")
+    print(" ", end="")
+    for x in range(len(lines)):
+        print(x, "  ", end="")
+    print("")
+    for i, linha in enumerate(lines):
+        print(i, end="")
+        for x in linha:
+            print("*", end="")
+            print("---" if x else "   ", end="")
+        print("*")
+        if i == len(columns[-1]):
+            break
+        print(" ", end="")
+        for x in columns:
+            print("|   " if x[i] else "    ", end="")
+        print(i)
+    for i in range(len(lines)-1):
+        print("  ", i, end="")
+    print("\n")
 
 def entrada():
     orientacao = input("Quer fazer uma Linha ou Coluna? (l/c)")
     if orientacao == "l":
-        x = input("Insira em qual linha que você quer por: (0~"+str(n)+")")
-        y = input("Insira qual posição da linha você quer por: (0~"+str(n-1)+")")
+        x = input("Insira em qual linha que você quer por: (0~"+str(n-1)+")")
+        y = input("Insira qual posição da linha você quer por: (0~"+str(n-2)+")")
     if orientacao == "c":
-        x = input("Insira em qual coluna que você quer por: (0~"+str(n)+")")
-        y = input("Insira qual posição da coluna você quer por: (0~"+str(n-1)+")")
+        x = input("Insira em qual coluna que você quer por: (0~"+str(n-1)+")")
+        y = input("Insira qual posição da coluna você quer por: (0~"+str(n-2)+")")
 
     return str(orientacao+" "+x+" "+y)
 
@@ -93,3 +98,32 @@ def fimDeJogo():
                 return False
     return True
 
+def main():
+    humano = Player()
+    ia = Player()
+    s=""
+    turno = humano
+    while not fimDeJogo():
+        printa_matriz()
+        stemp = 0
+        if turno == humano:
+            print("Humano")
+            s=entrada()
+            move(s)
+            stemp = score(s)
+            turno.pontuacao = stemp
+            if stemp == 0:
+                turno = ia
+        if turno == ia:
+            printa_matriz()
+            print("IA")
+            s=entrada()
+            move(s)
+            stemp = score(s)
+            turno.pontuacao = stemp
+            if stemp == 0:
+                turno = humano
+    print("Score humano: ", humano.pontuacao)
+    print("Score ia: ", ia)
+
+main()
