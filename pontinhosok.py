@@ -141,11 +141,11 @@ def find_moves():
 
 def minimax(depth, ia, humano, iaTurn, pontosIa, pontosHumano, alpha, beta):
      if depth == 0 or fimDeJogo():
-         #return pontosIa - pontosHumano, None
-         return ia.jogadas - humano.jogadas, None
+         return pontosIa - pontosHumano, None
+         #return ia.jogadas - humano.jogadas, None
      stemp = 0
      if iaTurn:
-         ia.jogadas +=1
+         #ia.jogadas +=1
          v = (-n**2-1, None)
          for current_move in find_moves():
              move(current_move)
@@ -164,12 +164,12 @@ def minimax(depth, ia, humano, iaTurn, pontosIa, pontosHumano, alpha, beta):
              alpha = max(alpha, v)
              undo_move(current_move)
              pontosIa -= stemp
-             ia.jogadas -= 1
+             #ia.jogadas -= 1
              if beta[0] <= alpha[0]:
                  break
          return v
      else:
-         humano.jogadas +=1
+         #humano.jogadas +=1
          v = (n**2+1, None)
          for current_move in find_moves():
              move(current_move)
@@ -188,7 +188,7 @@ def minimax(depth, ia, humano, iaTurn, pontosIa, pontosHumano, alpha, beta):
              beta = min(beta, v)
              undo_move(current_move)
              pontosHumano -= stemp
-             humano.jogadas -=1
+             #humano.jogadas -=1
              if beta[0] <= alpha[0]:
                  break
          return v
@@ -215,7 +215,7 @@ def main():
                 turno = ia
         if turno == ia:
             ia.jogadas +=1
-            s = minimax(6, ia, humano, True, ia.pontos, humano.pontos, (-n ** 2 - 1, None), (n ** 2 + 1, None))
+            s = minimax(7, ia, humano, True, ia.pontos, humano.pontos, (-n ** 2 - 1, None), (n ** 2 + 1, None))
             move(s[1])
             stemp = score(s[1])
             turno.pontos += stemp

@@ -18,8 +18,8 @@
       <file leaf-file-name="pontinhosok.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pontinhosok.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="185" column="44" lean-forward="false" selection-start-line="185" selection-start-column="44" selection-end-line="185" selection-end-column="44" />
+            <state relative-caret-position="0">
+              <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -224,13 +224,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pontinhosok.py</url>
-          <line>191</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
@@ -246,8 +239,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pontinhosok.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="185" column="44" lean-forward="false" selection-start-line="185" selection-start-column="44" selection-end-line="185" selection-end-column="44" />
+        <state relative-caret-position="0">
+          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
           <folding />
         </state>
       </provider>
