@@ -140,17 +140,17 @@ def find_moves():
     return lst
 
 
-def minimax(depth, ia, humano, realIa):
+def minimax(depth, ia, humano, iaTurn):
      if depth == 0 or fimDeJogo():
          return ia.pontos - humano.pontos, None
-     if ia==realIa:
+     if iaTurn:
          bestValue = (-n**2-1, None)
          for current_move in find_moves():
              move(current_move)
              if score(current_move) == 0:
-                v = minimax(depth - 1, humano, ia, realIa)[0], current_move
+                v = minimax(depth - 1, ia, humano, False)[0], current_move
              else:
-                v = minimax(depth - 1, ia, humano, realIa)[0], current_move #se fez ponto joga dnovo
+                v = minimax(depth - 1, ia, humano, True)[0], current_move #se fez ponto joga dnovo
              bestValue = max(bestValue, v)
              undo_move(current_move)
          return bestValue
@@ -159,9 +159,9 @@ def minimax(depth, ia, humano, realIa):
          for current_move in find_moves():
              move(current_move)
              if score(current_move)==0:
-                v = minimax(depth - 1, ia, humano, realIa)[0], current_move
+                v = minimax(depth - 1, ia, humano, True)[0], current_move
              else:
-                v = minimax(depth - 1, humano, ia, realIa)[0], current_move #se fez ponto joga dnovo
+                v = minimax(depth - 1, ia, humano, False)[0], current_move #se fez ponto joga dnovo
              bestValue = min(bestValue, v)
              undo_move(current_move)
          return bestValue
@@ -186,7 +186,7 @@ def main():
             if stemp == 0:
                 turno = ia
         if turno == ia:
-            s = minimax(7, ia, humano, ia)
+            s = minimax(6, ia, humano, True)
             move(s[1])
             stemp = score(s[1])
             turno.pontos += stemp
