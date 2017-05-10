@@ -163,7 +163,7 @@ def minimax(depth, ia, humano, iaTurn, pontosIa, pontosHumano, alpha, beta):
                  if temp > v[0]:
                      v = temp, current_move
              #alpha = max(alpha, v)
-                 beta = min(beta, v)
+                 #beta = min(beta, v)
                  undo_move(current_move)
                  pontosIa -= stemp
              #if beta[0] <= alpha[0]:
@@ -189,7 +189,7 @@ def minimax(depth, ia, humano, iaTurn, pontosIa, pontosHumano, alpha, beta):
                  if temp < v[0]:
                      v = temp , current_move
              #beta = min(beta, v)
-                 alpha = max(alpha, v)
+                 #alpha = max(alpha, v)
                  undo_move(current_move)
                  pontosHumano -= stemp
              #if beta[0] <= alpha[0]:
