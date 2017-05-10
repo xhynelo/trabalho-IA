@@ -111,7 +111,7 @@ def entrada():
         y = input("Insira qual posição da coluna você quer por: (0~"+str(n-2)+")")
         while y > str(n-2) or int(y) < 0:
             y = input("(0~" + str(n - 2) + ")")
-    return str(orientacao+" "+x+" "+y)
+    return f"{orientacao} {x} {y}"
 
 
 def fimDeJogo():
@@ -137,6 +137,7 @@ def find_moves():
             if not columns[i][j]:
                 res = "c {} {}".format(i, j)
                 lst.append(res)
+    return lst
 
 
 def minimax(depth, ia, humano, realIa):
