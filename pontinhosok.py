@@ -148,7 +148,7 @@ def minimax(depth, ia, humano, iaTurn, pontosIa, pontosHumano, alpha, beta):
          return pontosIa - pontosHumano, None
      stemp = 0
      if iaTurn:
-         v = (-n**2-1, None)
+         v = (-n*(n-1)*2-1, None)
          for current_move in find_moves():
              move(current_move)
              stemp = score(current_move)
@@ -174,7 +174,7 @@ def minimax(depth, ia, humano, iaTurn, pontosIa, pontosHumano, alpha, beta):
               #   break
          return v
      else:
-         v = (n**2+1, None)
+         v = (n*(n-1)*2+1, None)
          for current_move in find_moves():
              move(current_move)
              stemp = score(current_move)
@@ -228,7 +228,7 @@ def main():
             ia.jogadas +=1
             #if aumenta_depth == n//3:
             #	depth += 2
-            s = minimax(6, ia, humano, True, ia.pontos, humano.pontos, (-n ** 2 - 1, None), (n ** 2 + 1, None))
+            s = minimax(6, ia, humano, True, ia.pontos, humano.pontos, (-n*(n-1)*2 - 1, None), (n*(n-1)*2 + 1, None))
             move(s[1])
             stemp = score(s[1])
             turno.pontos += stemp
