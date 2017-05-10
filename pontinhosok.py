@@ -140,17 +140,18 @@ def find_moves():
     return lst
 
 
-def minimax(depth, ia, humano, iaTurn):
+def minimax(depth, ia, humano, iaTurn, pontosIa, pontosHumano):
      if depth == 0 or fimDeJogo():
-         return ia.pontos - humano.pontos, None
+         return pontosIa - pontosHumano, None
      if iaTurn:
          bestValue = (-n**2-1, None)
          for current_move in find_moves():
              move(current_move)
+             pontosIa += score(current_move)
              if score(current_move) == 0:
-                v = minimax(depth - 1, ia, humano, False)[0], current_move
+                v = minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano)[0], current_move
              else:
-                v = minimax(depth - 1, ia, humano, True)[0], current_move #se fez ponto joga dnovo
+                v = minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano)[0], current_move #se fez ponto joga dnovo
              bestValue = max(bestValue, v)
              undo_move(current_move)
          return bestValue
@@ -158,10 +159,11 @@ def minimax(depth, ia, humano, iaTurn):
          bestValue = (n**2+1, None)
          for current_move in find_moves():
              move(current_move)
+             pontosHumano += score(current_move)
              if score(current_move)==0:
-                v = minimax(depth - 1, ia, humano, True)[0], current_move
+                v = minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano)[0], current_move
              else:
-                v = minimax(depth - 1, ia, humano, False)[0], current_move #se fez ponto joga dnovo
+                v = minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano)[0], current_move #se fez ponto joga dnovo
              bestValue = min(bestValue, v)
              undo_move(current_move)
          return bestValue
@@ -186,7 +188,7 @@ def main():
             if stemp == 0:
                 turno = ia
         if turno == ia:
-            s = minimax(6, ia, humano, True)
+            s = minimax(6, ia, humano, True, ia.pontos, humano.pontos)
             move(s[1])
             stemp = score(s[1])
             turno.pontos += stemp
