@@ -151,9 +151,9 @@ def minimax(depth, ia, humano, iaTurn, pontosIa, pontosHumano, alpha, beta):
              stemp = score(current_move)
              pontosIa += stemp
              if score(current_move) == 0:
-                v = minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano, alpha, beta)[0], current_move
+                v = max(v, minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano, alpha, beta)[0], current_move)
              else:
-                v = minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano, alpha, beta)[0], current_move #se fez ponto joga dnovo
+                v = max(v, minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano, alpha, beta)[0], current_move) #se fez ponto joga dnovo
              alpha = max(alpha, v)
              undo_move(current_move)
              pontosIa -= stemp
@@ -164,12 +164,12 @@ def minimax(depth, ia, humano, iaTurn, pontosIa, pontosHumano, alpha, beta):
          v = (n**2+1, None)
          for current_move in find_moves():
              move(current_move)
-             stemp += score(current_move)
+             stemp = score(current_move)
              pontosHumano +=stemp
              if score(current_move)==0:
-                v = minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano, alpha, beta)[0], current_move
+                v = min(v, minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano, alpha, beta)[0], current_move)
              else:
-                v = minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano, alpha, beta)[0], current_move #se fez ponto joga dnovo
+                v = min(v, minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano, alpha, beta)[0], current_move) #se fez ponto joga dnovo
              beta = min(beta, v)
              undo_move(current_move)
              pontosHumano -= stemp
