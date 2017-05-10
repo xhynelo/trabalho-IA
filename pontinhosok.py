@@ -235,7 +235,7 @@ def main():
             if stemp == 0:
                 turno = humano
     printa_matriz()
-    print("Score humano: ...", humano.pontos)
+    print("Score humano: ", humano.pontos)
     print("Score ia: ", ia.pontos)
 
 main()
