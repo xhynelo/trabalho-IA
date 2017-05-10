@@ -201,9 +201,12 @@ def main():
     ia = Player()
     s=""
     turno = humano
+    aumenta_depth = 0
+    depth = 3
     while not fimDeJogo():
         printa_matriz()
         stemp = 0
+        aumenta_depth += 1
         if turno == humano:
             humano.jogadas += 1
             print("Humano")
@@ -218,7 +221,9 @@ def main():
                 turno = ia
         if turno == ia:
             ia.jogadas +=1
-            s = minimax(7, ia, humano, True, ia.pontos, humano.pontos, (-n ** 2 - 1, None), (n ** 2 + 1, None))
+            if aumenta_depth == n//3:
+            	depth += 2
+            s = minimax(depth, ia, humano, True, ia.pontos, humano.pontos, (-n ** 2 - 1, None), (n ** 2 + 1, None))
             move(s[1])
             stemp = score(s[1])
             turno.pontos += stemp
