@@ -7,6 +7,10 @@ class Player:
     def pontuacao(self, pontos):
         self.pontos = pontos
 
+def possiveis_jogadas():
+    possivel = []
+    
+
 def move(smove):
     smove = smove.split(" ")
     mat = int(smove[1])
@@ -112,20 +116,24 @@ def fimDeJogo():
                 return False
     return True
 
-def minimax(node, depth, ia, humano, realIa):
+def minimax(depth, ia, humano, realIa):
      if depth == 0 or fimDeJogo():
          return ia.pontos - humano.pontos
      if ia==realIa:
-         bestValue = -n**2+1
-         for child in node:
-             v = minimax(child, depth - 1, humano, ia, realIa)
+         bestValue = (-n**2+1, None)
+         for current_move in find_moves():
+             move(current_move)
+             v = minimax(depth - 1, humano, ia, realIa)[0], current_move
              bestValue = max(bestValue, v)
+             undo_move(current_move)
          return bestValue
      else:
-         bestValue = n**2+1
-         for child in node:
-             v = minimax(child, depth - 1, ia, humano, realIa)
+         bestValue = (n**2+1, None)
+         for current_move in find_moves():
+             move(current_move)
+             v = minimax(depth - 1, ia, humano, realIa)[0], current_move
              bestValue = min(bestValue, v)
+             undo_move(current_move)
          return bestValue
 
 def main():
