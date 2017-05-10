@@ -1,4 +1,4 @@
-n = 4
+n = 6
 lines = [[False]*(n-1) for _ in range(n)]
 columns = [[False]*(n-1) for _ in range(n)]
 
