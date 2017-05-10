@@ -223,6 +223,7 @@ def main():
             turno.pontos += stemp
             if stemp == 0:
                 turno = ia
+            printa_matriz()
         if turno == ia:
             ia.jogadas +=1
             #if aumenta_depth == n//3:
