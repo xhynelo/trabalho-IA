@@ -4,6 +4,7 @@ columns = [[False]*(n-1) for _ in range(n)]
 
 class Player:
     pontos=0
+    jogadas=0
     def pontuacao(self, pontos):
         self.pontos = pontos
 
@@ -140,38 +141,55 @@ def find_moves():
 
 def minimax(depth, ia, humano, iaTurn, pontosIa, pontosHumano, alpha, beta):
      if depth == 0 or fimDeJogo():
-         return pontosIa - pontosHumano, None
+         #return pontosIa - pontosHumano, None
+         return ia.jogadas - humano.jogadas, None
      stemp = 0
      if iaTurn:
+         ia.jogadas +=1
          v = (-n**2-1, None)
          for current_move in find_moves():
              move(current_move)
              stemp = score(current_move)
              pontosIa += stemp
              if score(current_move) == 0:
-                v = max(v, (minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano, alpha, beta)[0], current_move))
+                 temp = minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano, alpha, beta)[0]
+                 if temp > v[0]:
+                     v = temp, current_move
+                #v = max(v, (minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano, alpha, beta)[0], current_move))
              else:
-                v = max(v, (minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano, alpha, beta)[0], current_move)) #se fez ponto joga dnovo
+                 temp = minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano, alpha, beta)[0]
+                 if temp > v[0]:
+                     v = temp, current_move
+                #v = max(v, (minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano, alpha, beta)[0], current_move)) #se fez ponto joga dnovo
              alpha = max(alpha, v)
              undo_move(current_move)
              pontosIa -= stemp
-             if beta <= alpha:
+             ia.jogadas -= 1
+             if beta[0] <= alpha[0]:
                  break
          return v
      else:
+         humano.jogadas +=1
          v = (n**2+1, None)
          for current_move in find_moves():
              move(current_move)
              stemp = score(current_move)
              pontosHumano +=stemp
              if score(current_move)==0:
-                v = min(v, (minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano, alpha, beta)[0], current_move))
+                 temp = minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano, alpha, beta)[0]
+                 if temp < v[0]:
+                     v = temp, current_move
+                #v = min(v, (minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano, alpha, beta)[0], current_move))
              else:
-                v = min(v, (minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano, alpha, beta)[0], current_move)) #se fez ponto joga dnovo
+                 temp = minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano, alpha, beta)[0]
+                 if temp < v[0]:
+                     v = temp , current_move
+                #v = min(v, (minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano, alpha, beta)[0], current_move)) #se fez ponto joga dnovo
              beta = min(beta, v)
              undo_move(current_move)
              pontosHumano -= stemp
-             if beta <= alpha:
+             humano.jogadas -=1
+             if beta[0] <= alpha[0]:
                  break
          return v
 
@@ -184,6 +202,7 @@ def main():
         printa_matriz()
         stemp = 0
         if turno == humano:
+            humano.jogadas += 1
             print("Humano")
             s=entrada()
             while not move(s):
@@ -195,6 +214,7 @@ def main():
             if stemp == 0:
                 turno = ia
         if turno == ia:
+            ia.jogadas +=1
             s = minimax(6, ia, humano, True, ia.pontos, humano.pontos, (-n ** 2 - 1, None), (n ** 2 + 1, None))
             move(s[1])
             stemp = score(s[1])
