@@ -1,4 +1,4 @@
-n = 6
+n = 7
 lines = [[False]*(n-1) for _ in range(n)]
 columns = [[False]*(n-1) for _ in range(n)]
 
@@ -223,6 +223,7 @@ def main():
             ia.jogadas +=1
             if aumenta_depth == n//3:
             	depth += 2
+            	aumenta_depth = 0
             s = minimax(depth, ia, humano, True, ia.pontos, humano.pontos, (-n ** 2 - 1, None), (n ** 2 + 1, None))
             move(s[1])
             stemp = score(s[1])
