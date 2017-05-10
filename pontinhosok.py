@@ -140,33 +140,37 @@ def find_moves():
     return lst
 
 
-def minimax(depth, ia, humano, iaTurn, pontosIa, pontosHumano):
+def minimax(depth, ia, humano, iaTurn, pontosIa, pontosHumano, alpha, beta):
      if depth == 0 or fimDeJogo():
          return pontosIa - pontosHumano, None
      if iaTurn:
-         bestValue = (-n**2-1, None)
+         v = (-n**2-1, None)
          for current_move in find_moves():
              move(current_move)
              pontosIa += score(current_move)
              if score(current_move) == 0:
-                v = minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano)[0], current_move
+                v = minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano, alpha, beta)[0], current_move
              else:
-                v = minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano)[0], current_move #se fez ponto joga dnovo
-             bestValue = max(bestValue, v)
+                v = minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano, alpha, beta)[0], current_move #se fez ponto joga dnovo
+             alpha = max(alpha, v)
              undo_move(current_move)
-         return bestValue
+             if beta <= alpha:
+                 break
+         return v
      else:
-         bestValue = (n**2+1, None)
+         v = (n**2+1, None)
          for current_move in find_moves():
              move(current_move)
              pontosHumano += score(current_move)
              if score(current_move)==0:
-                v = minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano)[0], current_move
+                v = minimax(depth - 1, ia, humano, True, pontosIa, pontosHumano, alpha, beta)[0], current_move
              else:
-                v = minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano)[0], current_move #se fez ponto joga dnovo
-             bestValue = min(bestValue, v)
+                v = minimax(depth - 1, ia, humano, False, pontosIa, pontosHumano, alpha, beta)[0], current_move #se fez ponto joga dnovo
+             beta = min(beta, v)
              undo_move(current_move)
-         return bestValue
+             if beta <= alpha:
+                 break
+         return v
 
 def main():
     humano = Player()
@@ -188,7 +192,7 @@ def main():
             if stemp == 0:
                 turno = ia
         if turno == ia:
-            s = minimax(6, ia, humano, True, ia.pontos, humano.pontos)
+            s = minimax(6, ia, humano, True, ia.pontos, humano.pontos, (-n**2-1,None), (n**2+1,None))
             move(s[1])
             stemp = score(s[1])
             turno.pontos += stemp
