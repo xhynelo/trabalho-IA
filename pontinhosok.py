@@ -37,8 +37,8 @@ def undo_move(smove):
     pos = int(smove[2])
     if smove[0] == "l":
         lines[mat][pos] = False
-    elif smove[0] == 'l':
-        lines[mat][pos] = False
+    elif smove[0] == 'c':
+        columns[mat][pos] = False
 
 def score(cur_move):
     cur_move = cur_move.split(" ")
@@ -182,7 +182,7 @@ def main():
         if turno == ia:
             s = minimax(6, ia, humano, ia)
             move(s[1])
-            stemp = score(s)
+            stemp = score(s[1])
             turno.pontos += stemp
             if stemp == 0:
                 turno = humano
