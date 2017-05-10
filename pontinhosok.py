@@ -31,6 +31,15 @@ def move(smove):
         return False
 
 
+def undo_move(smove):
+    smove = smove.split(" ")
+    mat = int(smove[1])
+    pos = int(smove[2])
+    if smove[0] == "l":
+        lines[mat][pos] = False
+    elif smove[0] == 'l':
+        lines[mat][pos] = False
+
 def score(cur_move):
     cur_move = cur_move.split(" ")
     x = int(cur_move[1])
@@ -116,11 +125,25 @@ def fimDeJogo():
                 return False
     return True
 
+
+def find_moves():
+    res = ""
+    lst = []
+    for i in range(n):
+        for j in range(n-1):
+            if not lines[i][j]:
+                res = "l {} {}".format(i, j)
+                lst.append(res)
+            if not columns[i][j]:
+                res = "c {} {}".format(i, j)
+                lst.append(res)
+
+
 def minimax(depth, ia, humano, realIa):
      if depth == 0 or fimDeJogo():
-         return ia.pontos - humano.pontos
+         return ia.pontos - humano.pontos, None
      if ia==realIa:
-         bestValue = (-n**2+1, None)
+         bestValue = (-n**2-1, None)
          for current_move in find_moves():
              move(current_move)
              v = minimax(depth - 1, humano, ia, realIa)[0], current_move
@@ -156,10 +179,8 @@ def main():
             if stemp == 0:
                 turno = ia
         if turno == ia:
-            printa_matriz()
-            print("IA")
-            s=entrada()
-            move(s)
+            s = minimax(6, ia, humano, ia)
+            move(s[1])
             stemp = score(s)
             turno.pontos += stemp
             if stemp == 0:
