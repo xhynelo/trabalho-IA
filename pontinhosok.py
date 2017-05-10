@@ -1,4 +1,4 @@
-n = 4
+n = 5
 lines = [[False]*(n-1) for _ in range(n)]
 columns = [[False]*(n-1) for _ in range(n)]
 
@@ -7,8 +7,6 @@ class Player:
     def pontuacao(self, pontos):
         self.pontos = pontos
 
-def possiveis_jogadas():
-    possivel = []
     
 
 def move(smove):
@@ -182,11 +180,9 @@ def main():
     ia = Player()
     s=""
     turno = humano
-    i = 0;
     while not fimDeJogo():
         printa_matriz()
         stemp = 0
-        i+=1
         if turno == humano:
             print("Humano")
             s=entrada()
@@ -199,16 +195,7 @@ def main():
             if stemp == 0:
                 turno = ia
         if turno == ia:
-            if i > 12:
-                s = minimax(9, ia, humano, True, ia.pontos, humano.pontos, (-n**2-1,None), (n**2+1,None))
-            else:
-                if i > 10:
-                    s = minimax(8, ia, humano, True, ia.pontos, humano.pontos, (-n ** 2 - 1, None), (n ** 2 + 1, None))
-                else:
-                    if i > 8:
-                        s = minimax(7, ia, humano, True, ia.pontos, humano.pontos, (-n ** 2 - 1, None), (n ** 2 + 1, None))
-                    else:
-                        s = minimax(6, ia, humano, True, ia.pontos, humano.pontos, (-n ** 2 - 1, None), (n ** 2 + 1, None))
+            s = minimax(6, ia, humano, True, ia.pontos, humano.pontos, (-n ** 2 - 1, None), (n ** 2 + 1, None))
             move(s[1])
             stemp = score(s[1])
             turno.pontos += stemp
